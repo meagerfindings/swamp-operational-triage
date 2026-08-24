@@ -1,0 +1,22 @@
+{
+  "extension": "@mgreten/operational-triage",
+  "version": "2026.08.24.1",
+  "reviewedAt": "2026-08-24T14:56:00Z",
+  "dimensions": [
+    { "id": "credentials-secrets", "verdict": "pass", "note": "The model accepts no credentials and uses no vault. Strict schemas, public/internal sensitivity bounds, and recursive key/text denylist checks reject common credential, personal-data, URL, IP, and raw-payload leakage before persistence." },
+    { "id": "logging-quality", "verdict": "pass", "note": "Three structured lifecycle logs contain only schema-validated resource-safe snapshot IDs and no source summaries or payloads." },
+    { "id": "error-handling", "verdict": "pass", "note": "Schema, leakage, consistency, freshness, malformed input, conflicting replay, and storage failures propagate without a success result; validation diagnostics are stable and sorted." },
+    { "id": "testing-completeness", "verdict": "pass", "note": "Twelve passing tests cover persistence, strict leakage denial, denylist patterns, sensitivity, freshness, replay, storage failure, attestation accounting, safe names, provenance ambiguity, cyclic input, and zero authority." },
+    { "id": "idempotency-resilience", "verdict": "pass", "note": "Identical replay performs no write and returns no handle; same-ID content changes fail closed. Storage failures are not swallowed or represented as success." },
+    { "id": "api-contracts", "verdict": "na", "note": "This provider-neutral validation boundary performs no external API calls; provider adapters remain outside the extension." },
+    { "id": "resource-management", "verdict": "na", "note": "The extension opens no network connection, process, file, stream, or other external resource." },
+    { "id": "published-surface-hygiene", "verdict": "pass", "note": "The archive exposes one model plus README and MIT license. Fixtures and examples are synthetic and contain no live provider, account, endpoint, credential, or customer data." },
+    { "id": "schema-strictness", "verdict": "pass", "note": "The persisted envelope and every nested object are strict. IDs, counts, rows, bytes, windows, timestamps, source identity, evidence uniqueness, traversal, redaction, filtering, and authority are bounded and cross-validated." },
+    { "id": "lifetime-gc", "verdict": "pass", "note": "The sole immutable snapshot resource declares lifetime 30d and garbageCollection 10." },
+    { "id": "crud-completeness", "verdict": "na", "note": "The contract intentionally supports immutable validated snapshot persistence rather than a mutable CRUD lifecycle." },
+    { "id": "preflight-checks", "verdict": "pass", "note": "Complete schema, leakage, allowlist-accounting, freshness, redaction, authority, provenance, and replay checks precede the sole write." },
+    { "id": "instance-names", "verdict": "pass", "note": "Resource names are deterministic snapshot-<snapshotId>; snapshotId now permits only resource-safe letters, numbers, colon, dot, underscore, and hyphen." },
+    { "id": "data-access", "verdict": "pass", "note": "Replay detection uses context.readResource and persistence uses context.writeResource; implementation never accesses Swamp storage directly." },
+    { "id": "version-upgrades", "verdict": "na", "note": "The extension is unpublished. Version 2026.08.24.1 is the registry-proposed first publication version, so no persisted published-version upgrade exists." }
+  ]
+}
